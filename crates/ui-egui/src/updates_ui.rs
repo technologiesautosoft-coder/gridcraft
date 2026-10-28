@@ -1,34 +1,33 @@
-//! One background check at startup (and on Help ▸ Check for Updates…) and the modal prompt that
+//! This fork checks only on Help ▸ Check for Updates, against its own repository. The modal prompt
 //! offers the new release: Update and Restart (direct self-update), Download or Later. The flow
 //! itself is `craft_update::updater::Updater`.
 
-use craft_update::suite::GRIDCRAFT;
+use craft_update::app::App;
 use craft_update::updater::{Action, Status, Updater};
 
 use crate::SheetApp;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
+/// This fork must never replace itself with an upstream release that lacks its import fixes.
+pub const UPDATE_APP: App = App::new("gridcraft", "GridCraft", "AutoSoft spreadsheet fork", "technologiesautosoft-coder/gridcraft");
+
 pub(crate) struct Runtime {
     updater: Updater,
-    /// The check at start was asked for; `tick` starts it with the context.
-    startup: bool,
     /// Help ▸ Check for Updates… was chosen; the next `tick` starts it.
     manual: bool,
 }
 
 impl Default for Runtime {
     fn default() -> Self {
-        Self { updater: Updater::new(&GRIDCRAFT, VERSION), startup: false, manual: false }
+        Self { updater: Updater::new(&UPDATE_APP, VERSION), manual: false }
     }
 }
 
-/// Ask for a check; the next frame's `tick` starts it. A manual one reports every outcome.
+/// Manual checks run on the next frame. Startup checks are disabled until fork releases exist.
 pub(crate) fn start(app: &mut SheetApp, manual: bool) {
     if manual {
         app.updates_rt.manual = true;
-    } else {
-        app.updates_rt.startup = true;
     }
 }
 
@@ -36,8 +35,6 @@ pub(crate) fn tick(app: &mut SheetApp, ctx: &egui::Context) {
     let rt = &mut app.updates_rt;
     if std::mem::take(&mut rt.manual) {
         rt.updater.check_now(ctx);
-    } else if rt.startup {
-        rt.updater.check_at_start(ctx);
     }
     rt.updater.tick(ctx);
     let lang = app.ui.language;

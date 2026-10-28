@@ -122,6 +122,10 @@ fn decrypt_message(name: &str, e: gridcraft_xlsx::DecryptError) -> String {
 fn open_plain(name: &str, bytes: &[u8], csv_as_text: bool) -> Result<(Workbook, Vec<String>)> {
     let kind = FileKind::from_path(name);
     let sniffed = gridcraft_xlsx::sniff(bytes);
+    if sniffed == gridcraft_xlsx::Format::SpreadsheetXml {
+        let (wb, report) = gridcraft_xlsx::read_spreadsheetml(bytes).map_err(|e| EngineError::Other(format!("We can't import '{name}': {e}")))?;
+        return Ok((wb, report.warnings));
+    }
     if sniffed == gridcraft_xlsx::Format::Xls {
         let (wb, report) = gridcraft_xlsx::read_xls(bytes).map_err(|e| EngineError::Other(format!("We can't open '{name}': {e}")))?;
         return Ok((wb, report.warnings));

@@ -25,6 +25,7 @@ mod range_fill_formats;
 mod row_autofit;
 mod sheet_name_quoting;
 mod sparse_clear_invalidation;
+mod spreadsheetml_import;
 mod stored_list_shape;
 mod table_resize_overlap;
 mod table_total_row_last_row;

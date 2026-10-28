@@ -4,11 +4,11 @@ members = ["crates/*", "apps/*", "xtask"]
 default-members = ["crates/*", "apps/gridcraft", "apps/gridcraft-cli", "xtask"]
 
 [workspace.package]
-version = "0.12.1"
+version = "0.12.1-autosoft.1"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 rust-version = "1.95"
-repository = "https://github.com/storytold/gridcraft"
+repository = "https://github.com/technologiesautosoft-coder/gridcraft"
 
 [workspace.dependencies]
 # internal

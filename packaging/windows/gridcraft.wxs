@@ -172,6 +172,7 @@
              ignored (WiX rejects an empty Value, so it repeats the ProgId). -->
         <RegistryValue Root="HKMU" Key="Software\Classes\.xlsx\OpenWithProgids" Name="GridCraft.Workbook" Value="GridCraft.Workbook" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\Classes\.xlsm\OpenWithProgids" Name="GridCraft.Workbook" Value="GridCraft.Workbook" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.xls\OpenWithProgids" Name="GridCraft.Workbook" Value="GridCraft.Workbook" Type="string" />
         <!-- .xlsb and .ods are imported (data only) into a new workbook that saves as .xlsx. -->
         <RegistryValue Root="HKMU" Key="Software\Classes\.xlsb\OpenWithProgids" Name="GridCraft.Workbook" Value="GridCraft.Workbook" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\Classes\.ods\OpenWithProgids" Name="GridCraft.Workbook" Value="GridCraft.Workbook" Type="string" />
@@ -183,6 +184,7 @@
         <RegistryValue Root="HKMU" Key="Software\GridCraft\Capabilities" Name="ApplicationDescription" Value="Open-source spreadsheet for .xlsx, CSV and TSV files" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\GridCraft\Capabilities\FileAssociations" Name=".xlsx" Value="GridCraft.Workbook" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\GridCraft\Capabilities\FileAssociations" Name=".xlsm" Value="GridCraft.Workbook" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\GridCraft\Capabilities\FileAssociations" Name=".xls" Value="GridCraft.Workbook" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\GridCraft\Capabilities\FileAssociations" Name=".csv" Value="GridCraft.TextData" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\GridCraft\Capabilities\FileAssociations" Name=".tsv" Value="GridCraft.TextData" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\RegisteredApplications" Name="GridCraft" Value="Software\GridCraft\Capabilities" Type="string" />

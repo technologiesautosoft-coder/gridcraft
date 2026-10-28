@@ -167,9 +167,10 @@ fn services() -> Services {
         paste_text: Some(Box::new(move || read_clipboard(&text_clipboard, |clipboard| clipboard.get_text()))),
         pick_open: Some(Box::new(|| {
             rfd::FileDialog::new()
-                .add_filter("Spreadsheets", &["xlsx", "xlsm", "xls", "xlsb", "ods", "csv", "tsv", "txt", "json"])
+                .add_filter("Spreadsheets", &["xlsx", "xlsm", "xls", "xml", "xlsb", "ods", "csv", "tsv", "txt", "json"])
                 .add_filter("Excel Workbook", &["xlsx", "xlsm"])
                 .add_filter("Excel 97-2003 Workbook (import)", &["xls"])
+                .add_filter("Excel XML Spreadsheet (import)", &["xml"])
                 .add_filter("Excel Binary Workbook (data import)", &["xlsb"])
                 .add_filter("OpenDocument Spreadsheet (data import)", &["ods"])
                 .add_filter("CSV", &["csv"])
@@ -256,7 +257,7 @@ fn main() -> eframe::Result<()> {
     }));
     let args: Vec<String> = std::env::args().skip(1).collect();
     // The restart helper a self-update spawns: it finishes the swap and relaunches, then exits.
-    if let Some(done) = craft_update::self_update::finish(&craft_update::suite::GRIDCRAFT, &std::env::args_os().skip(1).collect::<Vec<_>>()) {
+    if let Some(done) = craft_update::self_update::finish(&gridcraft_ui_egui::UPDATE_APP, &std::env::args_os().skip(1).collect::<Vec<_>>()) {
         if let Err(e) = done {
             eprintln!("GridCraft update helper failed: {e}");
             std::process::exit(1);
@@ -439,6 +440,7 @@ mod packaging_tests {
         let mac = extensions(plist, "<key>CFBundleTypeExtensions</key>", "<string>", '<');
         let win = extensions(wxs, "Key=\"Software\\Classes\\.", "", '\\');
         assert!(mac.iter().any(|e| e == "xlsx"), "Info.plist.in extensions not found: {mac:?}");
+        assert!(mac.iter().any(|e| e == "xls"), "legacy XLS import must be offered by Finder: {mac:?}");
         assert_eq!(mac, win);
         for ext in &mac {
             assert!(FileKind::from_path(&format!("book.{ext}")).is_some(), "GridCraft doesn't open .{ext}");

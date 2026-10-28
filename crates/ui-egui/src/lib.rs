@@ -39,6 +39,8 @@ pub mod text_box;
 pub mod theme;
 #[cfg(not(target_arch = "wasm32"))]
 mod updates_ui;
+#[cfg(not(target_arch = "wasm32"))]
+pub use updates_ui::UPDATE_APP;
 pub mod widgets;
 mod window_ui;
 

@@ -1,11 +1,6 @@
-<p align="center">
-  <a href="https://getartcraft.com/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/brand/artcraft-logo-white.svg">
-      <img alt="ArtCraft" src="docs/brand/artcraft-logo.svg" width="200">
-    </picture>
-  </a>
-</p>
+> **AutoSoft fork:** maintained at [technologiesautosoft-coder/gridcraft](https://github.com/technologiesautosoft-coder/gridcraft). Based on GridCraft by the ArtCraft team and community. This is an independent modified version, not an official ArtCraft build.
+>
+> Adds native import for Excel 2003 XML reports distributed as `.xls`, plus `.xls` file associations on macOS, Windows and Linux. See [the fork notes](docs/autosoft-fork.md) for supported features, limits, build and installation instructions.
 
 <p align="center">
   <img src="assets/app-icon/hicolor/256x256/apps/ai.storyteller.gridcraft.png" width="128" height="128" alt="GridCraft icon: a spreadsheet page on a green tile">
@@ -20,7 +15,7 @@
 <p align="center">
   A fast, open-source, clean-room take on modern spreadsheet workflows. It runs natively on macOS,
   Windows, Linux and BSD, and in the browser via WebAssembly.<br>
-  <i>By the ArtCraft team.</i>
+  <i>AutoSoft fork, based on GridCraft by the ArtCraft team.</i>
 </p>
 
 <p align="center">
@@ -336,14 +331,6 @@ All UI icons are drawn in code and are original; the sample workbooks and every 
 this README were made with GridCraft itself. GridCraft bundles no fonts: it uses the fonts
 installed on your system.
 
-The ArtCraft name, wordmark and logos in [`docs/brand/`](docs/brand/) are trademarks of the
-ArtCraft Team and are not covered by this license. They may be used only unmodified, and only as
-part of this repository and GridCraft, under [`docs/brand/LICENSE-brand.txt`](docs/brand/LICENSE-brand.txt).
-Forks and modified versions must remove them.
+ArtCraft trademark graphics have been removed from this fork. The upstream [brand terms](docs/brand/LICENSE-brand.txt) remain for reference. This independent fork is not endorsed by the ArtCraft team.
 
 <br>
-
-<p align="center">
-  <a href="https://getartcraft.com/"><img alt="ArtCraft" src="docs/brand/artcraft-mark.svg" width="28"></a><br>
-  <sub>Made by the <a href="https://getartcraft.com/">ArtCraft</a> team and community.</sub>
-</p>

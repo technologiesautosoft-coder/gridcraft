@@ -28,6 +28,7 @@ mod read;
 mod richdata;
 mod sheet_read;
 mod sheet_write;
+mod spreadsheetml;
 mod styles;
 mod tables;
 #[cfg(any(test, feature = "test-support"))]
@@ -49,6 +50,7 @@ pub use csv::{MAX_CSV_BYTES, read_csv, write_csv, write_csv_limited};
 pub use ods::read_ods;
 pub use package::MAX_PART;
 pub use passthrough::rebase_links;
+pub use spreadsheetml::read_spreadsheetml;
 pub use xls::read_xls;
 pub use xlsb::read_xlsb;
 
@@ -174,6 +176,8 @@ pub enum Format {
     Xlsx,
     Xlsb,
     Ods,
+    /// Standalone Excel 2003 XML Spreadsheet (often distributed as `.xls`).
+    SpreadsheetXml,
     Csv,
     /// A password-protected (encrypted) workbook: a compound file with an `EncryptedPackage`.
     Encrypted,
@@ -206,6 +210,9 @@ pub fn sniff(bytes: &[u8]) -> Format {
         } else {
             Format::LegacyBinary
         };
+    }
+    if spreadsheetml::is_spreadsheetml(bytes) {
+        return Format::SpreadsheetXml;
     }
     if bytes.starts_with(&[0xFF, 0xFE]) || bytes.starts_with(&[0xFE, 0xFF]) || bytes.starts_with(&[0xEF, 0xBB, 0xBF]) {
         return Format::Csv;
